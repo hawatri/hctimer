@@ -61,27 +61,28 @@ function App() {
   const stats = getStats();
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
       <Header 
         onSettingsClick={() => setShowSettings(true)}
         onExport={() => {/* TODO: Implement export */}}
         onImport={() => {/* TODO: Implement import */}}
       />
 
-      <div className="container mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column - Event Selector & Stats */}
-          <div className="space-y-6">
-            <EventSelector 
-              currentEvent={currentEvent}
-              onEventChange={setCurrentEvent}
-            />
-            <SessionStats stats={stats} />
-          </div>
+      <div className="container mx-auto px-6 py-6">
+        {/* Top section - Event Selector */}
+        <div className="mb-8">
+          <EventSelector 
+            currentEvent={currentEvent}
+            onEventChange={setCurrentEvent}
+          />
+        </div>
 
-          {/* Center Column - Timer & Scramble */}
-          <div className="lg:col-span-1 space-y-6">
+        {/* Main timer section */}
+        <div className="text-center mb-10">
+          <div className="mb-6">
             <ScrambleDisplay scramble={scramble} />
+          </div>
+          <div className="mb-6">
             <TimerDisplay 
               time={currentTime}
               isRunning={isRunning}
@@ -89,12 +90,17 @@ function App() {
               timerState={timerState}
               settings={settings}
             />
-            <div className="text-center text-sm text-gray-400">
-              Hold SPACE to prepare, release to start
-            </div>
           </div>
+          <div className="text-center text-base text-gray-400 mb-8 ui-font">
+            Hold SPACE to prepare, release to start
+          </div>
+        </div>
 
-          {/* Right Column - Times List */}
+        {/* Bottom section - Stats and Times side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div>
+            <SessionStats stats={stats} />
+          </div>
           <div>
             <TimesList 
               times={session.times}

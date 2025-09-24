@@ -40,12 +40,12 @@ export const TimerDisplay: React.FC<TimerDisplayProps> = ({
   };
 
   return (
-    <div className="text-center">
-      <div className={`text-6xl md:text-8xl font-mono font-bold transition-colors duration-200 ${getDisplayColor()}`}>
+    <div className="text-center py-8">
+      <div className={`text-8xl md:text-9xl lg:text-[12rem] timer-font font-light transition-colors duration-200 ${getDisplayColor()} leading-none`}>
         {getDisplayText()}
       </div>
       {timerState === 'stopped' && time > 0 && (
-        <div className="mt-2 text-sm text-gray-400">
+        <div className="mt-4 text-base text-gray-400 ui-font">
           Click to reset
         </div>
       )}

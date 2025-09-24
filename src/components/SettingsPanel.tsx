@@ -8,25 +8,25 @@ interface SettingsPanelProps {
 
 export const SettingsPanel: React.FC<SettingsPanelProps> = ({ settings, onClose }) => {
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-      <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md mx-4">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-white">Settings</h2>
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="glass rounded-2xl p-8 w-full max-w-lg mx-6">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-2xl font-semibold text-white ui-font">Settings</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-gray-400 hover:text-white"
           >
-            <X className="w-5 h-5" />
+            <X className="w-6 h-6" />
           </button>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-8">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-base font-medium text-gray-300 mb-3 ui-font">
               Inspection Time
             </label>
             <select 
-              className="w-full bg-gray-700 border border-gray-600 rounded-lg px-3 py-2 text-white"
+              className="w-full glass border border-white/10 rounded-xl px-4 py-3 text-white ui-font text-base focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               value={settings.inspectionTime}
               onChange={(e) => settings.setInspectionTime(parseInt(e.target.value))}
             >
@@ -37,38 +37,38 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ settings, onClose 
           </div>
 
           <div>
-            <label className="flex items-center space-x-3">
+            <label className="flex items-center space-x-4">
               <input
                 type="checkbox"
                 checked={settings.showMilliseconds}
                 onChange={(e) => settings.setShowMilliseconds(e.target.checked)}
-                className="rounded bg-gray-700 border-gray-600 text-blue-600 focus:ring-blue-500"
+                className="rounded glass border-white/20 text-blue-500 focus:ring-blue-500/50 focus:ring-offset-0 w-5 h-5"
               />
-              <span className="text-gray-300">Show milliseconds</span>
+              <span className="text-gray-300 ui-font text-base">Show milliseconds</span>
             </label>
           </div>
 
           <div>
-            <label className="flex items-center space-x-3">
+            <label className="flex items-center space-x-4">
               <input
                 type="checkbox"
                 checked={settings.hideTime}
                 onChange={(e) => settings.setHideTime(e.target.checked)}
-                className="rounded bg-gray-700 border-gray-600 text-blue-600 focus:ring-blue-500"
+                className="rounded glass border-white/20 text-blue-500 focus:ring-blue-500/50 focus:ring-offset-0 w-5 h-5"
               />
-              <span className="text-gray-300">Hide time while solving</span>
+              <span className="text-gray-300 ui-font text-base">Hide time while solving</span>
             </label>
           </div>
 
           <div>
-            <label className="flex items-center space-x-3">
+            <label className="flex items-center space-x-4">
               <input
                 type="checkbox"
                 checked={settings.enableSound}
                 onChange={(e) => settings.setEnableSound(e.target.checked)}
-                className="rounded bg-gray-700 border-gray-600 text-blue-600 focus:ring-blue-500"
+                className="rounded glass border-white/20 text-blue-500 focus:ring-blue-500/50 focus:ring-offset-0 w-5 h-5"
               />
-              <span className="text-gray-300">Enable sound effects</span>
+              <span className="text-gray-300 ui-font text-base">Enable sound effects</span>
             </label>
           </div>
         </div>

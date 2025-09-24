@@ -9,31 +9,30 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onSettingsClick, onExport, onImport }) => {
   return (
-    <header className="bg-gray-800 border-b border-gray-700">
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <h1 className="text-2xl font-bold text-white">HCTimer</h1>
-          <span className="text-sm text-gray-400">Speedcubing Timer</span>
+    <header className="glass-dark border-b border-white/10 sticky top-0 z-40">
+      <div className="container mx-auto px-6 py-3 flex items-center justify-between">
+        <div className="flex items-center">
+          <h1 className="text-2xl font-semibold text-white ui-font">HCTimer</h1>
         </div>
         
         <div className="flex items-center space-x-2">
           <button
             onClick={onImport}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-            title="Import Session"
+            className="p-3 hover:bg-white/10 rounded-lg transition-all text-gray-300 hover:text-white"
+            title="Import"
           >
             <Upload className="w-5 h-5" />
           </button>
           <button
             onClick={onExport}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
-            title="Export Session"
+            className="p-3 hover:bg-white/10 rounded-lg transition-all text-gray-300 hover:text-white"
+            title="Export"
           >
             <Download className="w-5 h-5" />
           </button>
           <button
             onClick={onSettingsClick}
-            className="p-2 hover:bg-gray-700 rounded-lg transition-colors"
+            className="p-3 hover:bg-white/10 rounded-lg transition-all text-gray-300 hover:text-white"
             title="Settings"
           >
             <Settings className="w-5 h-5" />

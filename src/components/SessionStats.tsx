@@ -20,23 +20,25 @@ export const SessionStats: React.FC<SessionStatsProps> = ({ stats }) => {
     value, 
     highlight = false 
   }) => (
-    <div className={`bg-gray-800 rounded-lg p-3 ${highlight ? 'ring-2 ring-blue-500' : ''}`}>
-      <div className="text-xs text-gray-400 uppercase tracking-wide">{label}</div>
-      <div className="text-lg font-mono font-semibold text-white">
+    <div className={`glass rounded-xl p-4 transition-all ${
+      highlight ? 'ring-2 ring-blue-400/50 bg-blue-500/10' : ''
+    }`}>
+      <div className="text-sm text-gray-400 uppercase tracking-wider ui-font font-medium">{label}</div>
+      <div className="text-xl timer-font font-medium text-white mt-1">
         {value !== undefined ? formatTime(value) : '-'}
       </div>
     </div>
   );
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-white">Session Statistics</h3>
+    <div className="space-y-6">
+      <h3 className="text-2xl font-semibold text-white ui-font">Session Statistics</h3>
       
-      <div className="text-sm text-gray-400">
-        Solves: {stats.count}
+      <div className="text-base text-gray-300 ui-font">
+        Solves: <span className="font-semibold text-white">{stats.count}</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <StatCard label="Best" value={stats.best} highlight />
         <StatCard label="Worst" value={stats.worst} />
         <StatCard label="Ao5" value={stats.ao5} highlight />

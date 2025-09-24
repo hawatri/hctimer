@@ -14,19 +14,32 @@ export const useSettings = () => {
     hideTime: false,
     enableSound: true
   });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Load settings from localStorage
   useEffect(() => {
-    const stored = localStorage.getItem('hctimer-settings');
-    if (stored) {
-      setSettings(JSON.parse(stored));
+    try {
+      const stored = localStorage.getItem('hctimer-settings');
+      if (stored) {
+        const parsedSettings = JSON.parse(stored);
+        setSettings(parsedSettings);
+      }
+    } catch (error) {
+      console.error('Failed to load settings from localStorage:', error);
     }
+    setIsLoaded(true);
   }, []);
 
-  // Save settings to localStorage
+  // Save settings to localStorage (but only after initial load)
   useEffect(() => {
-    localStorage.setItem('hctimer-settings', JSON.stringify(settings));
-  }, [settings]);
+    if (isLoaded) {
+      try {
+        localStorage.setItem('hctimer-settings', JSON.stringify(settings));
+      } catch (error) {
+        console.error('Failed to save settings to localStorage:', error);
+      }
+    }
+  }, [settings, isLoaded]);
 
   const updateSetting = (key: keyof Settings, value: any) => {
     setSettings(prev => ({ ...prev, [key]: value }));

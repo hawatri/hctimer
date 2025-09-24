@@ -14,21 +14,34 @@ interface Session {
 
 export const useSession = (event: string) => {
   const [sessions, setSessions] = useState<Record<string, Session>>({});
+  const [isLoaded, setIsLoaded] = useState(false);
   
   const currentSession = sessions[event] || { times: [] };
 
   // Load sessions from localStorage on mount
   useEffect(() => {
-    const stored = localStorage.getItem('hctimer-sessions');
-    if (stored) {
-      setSessions(JSON.parse(stored));
+    try {
+      const stored = localStorage.getItem('hctimer-sessions');
+      if (stored) {
+        const parsedSessions = JSON.parse(stored);
+        setSessions(parsedSessions);
+      }
+    } catch (error) {
+      console.error('Failed to load sessions from localStorage:', error);
     }
+    setIsLoaded(true);
   }, []);
 
-  // Save sessions to localStorage whenever they change
+  // Save sessions to localStorage whenever they change (but only after initial load)
   useEffect(() => {
-    localStorage.setItem('hctimer-sessions', JSON.stringify(sessions));
-  }, [sessions]);
+    if (isLoaded) {
+      try {
+        localStorage.setItem('hctimer-sessions', JSON.stringify(sessions));
+      } catch (error) {
+        console.error('Failed to save sessions to localStorage:', error);
+      }
+    }
+  }, [sessions, isLoaded]);
 
   const addTime = useCallback((time: number, scramble: string) => {
     const newTime: Time = {
