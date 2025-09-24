@@ -29,7 +29,7 @@ export const EventSelector: React.FC<EventSelectorProps> = ({ currentEvent, onEv
           className={`px-4 py-2 rounded-xl text-base ui-font font-medium transition-all ${
             currentEvent === event.id
               ? 'bg-blue-500/80 text-white shadow-lg shadow-blue-500/25 backdrop-blur-sm'
-              : 'glass text-gray-300 hover:bg-white/10 hover:text-white'
+              : 'glass text-secondary hover:bg-white/10 hover:text-primary'
           }`}
         >
           {event.name}

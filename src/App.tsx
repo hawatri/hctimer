@@ -11,14 +11,23 @@ import { useScramble } from './hooks/useScramble';
 import { useSession } from './hooks/useSession';
 import { useSettings } from './hooks/useSettings';
 import { useKeyboard } from './hooks/useKeyboard';
+import { ThemeProvider } from './hooks/useTheme';
 
 function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
+
+function AppContent() {
   const [showSettings, setShowSettings] = useState(false);
   const [currentEvent, setCurrentEvent] = useState('333');
   
   const settings = useSettings();
   const { currentTime, isRunning, isReady, timerState, startTimer, stopTimer, resetTimer, prepareTimer, cancelPrepare } = useTimer(settings);
-  const { scramble, generateScramble } = useScramble(currentEvent);
+  const { scramble, generateScramble, nextScramble, previousScramble, canGoNext, canGoPrevious } = useScramble(currentEvent);
   const { session, addTime, deleteTime, clearSession, getStats } = useSession(currentEvent);
 
   // Generate initial scramble
@@ -80,7 +89,13 @@ function App() {
         {/* Main timer section */}
         <div className="text-center mb-10">
           <div className="mb-6">
-            <ScrambleDisplay scramble={scramble} />
+            <ScrambleDisplay 
+              scramble={scramble}
+              onNextScramble={nextScramble}
+              onPreviousScramble={previousScramble}
+              canGoNext={canGoNext}
+              canGoPrevious={canGoPrevious}
+            />
           </div>
           <div className="mb-6">
             <TimerDisplay 
