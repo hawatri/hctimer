@@ -12,16 +12,20 @@ export const ThemeSwitcher: React.FC = () => {
   ];
 
   return (
-    <div className="flex items-center space-x-1 bg-black/20 backdrop-blur-sm rounded-lg p-1">
+    <div className="flex items-center space-x-1 glass-dark rounded-lg p-1">
       {themes.map(({ key, icon, label }) => (
         <button
           key={key}
           onClick={() => setTheme(key)}
           className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-all ui-font ${
             theme === key
-              ? 'bg-white/20 text-white shadow-sm'
-              : 'text-gray-400 hover:text-white hover:bg-white/10'
+              ? 'glass shadow-sm'
+              : 'hover:bg-white/10'
           }`}
+          style={{
+            color: theme === key ? 'var(--text-primary)' : 'var(--text-muted)',
+            backgroundColor: theme === key ? 'var(--glass-bg)' : 'transparent'
+          }}
           title={label}
         >
           {icon}

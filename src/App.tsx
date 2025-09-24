@@ -70,58 +70,63 @@ function AppContent() {
   const stats = getStats();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+    <div className="h-screen overflow-hidden flex flex-col" style={{
+      background: `linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), var(--bg-tertiary))`,
+      color: 'var(--text-primary)'
+    }}>
       <Header 
         onSettingsClick={() => setShowSettings(true)}
         onExport={() => {/* TODO: Implement export */}}
         onImport={() => {/* TODO: Implement import */}}
       />
 
-      <div className="container mx-auto px-6 py-6">
-        {/* Top section - Event Selector */}
-        <div className="mb-8">
-          <EventSelector 
-            currentEvent={currentEvent}
-            onEventChange={setCurrentEvent}
-          />
-        </div>
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full flex flex-col px-4 py-2">
+          {/* Top section - Event Selector */}
+          <div className="mb-3 flex-shrink-0">
+            <EventSelector 
+              currentEvent={currentEvent}
+              onEventChange={setCurrentEvent}
+            />
+          </div>
 
-        {/* Main timer section */}
-        <div className="text-center mb-10">
-          <div className="mb-6">
-            <ScrambleDisplay 
-              scramble={scramble}
-              onNextScramble={nextScramble}
-              onPreviousScramble={previousScramble}
-              canGoNext={canGoNext}
-              canGoPrevious={canGoPrevious}
-            />
+          {/* Main timer section */}
+          <div className="text-center mb-3 flex-shrink-0">
+            <div className="mb-2">
+              <ScrambleDisplay 
+                scramble={scramble}
+                onNextScramble={nextScramble}
+                onPreviousScramble={previousScramble}
+                canGoNext={canGoNext}
+                canGoPrevious={canGoPrevious}
+              />
+            </div>
+            <div className="mb-2">
+              <TimerDisplay 
+                time={currentTime}
+                isRunning={isRunning}
+                isReady={isReady}
+                timerState={timerState}
+                settings={settings}
+              />
+            </div>
+            <div className="text-center text-sm ui-font" style={{ color: 'var(--text-muted)' }}>
+              Hold SPACE to prepare, release to start
+            </div>
           </div>
-          <div className="mb-6">
-            <TimerDisplay 
-              time={currentTime}
-              isRunning={isRunning}
-              isReady={isReady}
-              timerState={timerState}
-              settings={settings}
-            />
-          </div>
-          <div className="text-center text-base text-gray-400 mb-8 ui-font">
-            Hold SPACE to prepare, release to start
-          </div>
-        </div>
 
-        {/* Bottom section - Stats and Times side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <div>
-            <SessionStats stats={stats} />
-          </div>
-          <div>
-            <TimesList 
-              times={session.times}
-              onDeleteTime={deleteTime}
-              onClearSession={clearSession}
-            />
+          {/* Bottom section - Stats and Times side by side */}
+          <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6 overflow-hidden">
+            <div className="overflow-hidden">
+              <SessionStats stats={stats} />
+            </div>
+            <div className="overflow-hidden">
+              <TimesList 
+                times={session.times}
+                onDeleteTime={deleteTime}
+                onClearSession={clearSession}
+              />
+            </div>
           </div>
         </div>
       </div>

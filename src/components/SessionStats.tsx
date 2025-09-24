@@ -20,25 +20,28 @@ export const SessionStats: React.FC<SessionStatsProps> = ({ stats }) => {
     value, 
     highlight = false 
   }) => (
-    <div className={`glass rounded-xl p-4 transition-all ${
-      highlight ? 'ring-2 ring-blue-400/50 bg-blue-500/10' : ''
-    }`}>
-      <div className="text-sm text-gray-400 uppercase tracking-wider ui-font font-medium">{label}</div>
-      <div className="text-xl timer-font font-medium text-white mt-1">
+    <div className={`glass rounded-lg p-4 transition-all ${
+      highlight ? 'ring-2 ring-blue-400/50' : ''
+    }`} style={{ 
+      backgroundColor: highlight ? 'rgba(59, 130, 246, 0.1)' : 'var(--glass-bg)',
+      margin: '2px'
+    }}>
+      <div className="text-xs uppercase tracking-wider ui-font font-medium px-1" style={{ color: 'var(--text-muted)' }}>{label}</div>
+      <div className="text-lg timer-font font-medium mt-1 px-1" style={{ color: 'var(--text-primary)' }}>
         {value !== undefined ? formatTime(value) : '-'}
       </div>
     </div>
   );
 
   return (
-    <div className="space-y-6">
-      <h3 className="text-2xl font-semibold text-white ui-font">Session Statistics</h3>
+    <div className="h-full flex flex-col overflow-hidden">
+      <h3 className="text-xl font-semibold ui-font mb-3" style={{ color: 'var(--text-primary)' }}>Session Statistics</h3>
       
-      <div className="text-base text-gray-300 ui-font">
-        Solves: <span className="font-semibold text-white">{stats.count}</span>
+      <div className="text-sm ui-font mb-4" style={{ color: 'var(--text-secondary)' }}>
+        Solves: <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{stats.count}</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="flex-1 grid grid-cols-2 gap-4 content-start p-1">
         <StatCard label="Best" value={stats.best} highlight />
         <StatCard label="Worst" value={stats.worst} />
         <StatCard label="Ao5" value={stats.ao5} highlight />
